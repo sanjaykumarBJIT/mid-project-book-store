@@ -1,0 +1,18 @@
+Got all data at: Date: 29/7/2 Time: 1693301918509
+Accessed all data at: Date: 29/7/2 Time: 1693302399678
+Accessed One by Id at: Date: 29/7/2 Time: 1693302408735
+Created at: Date: 29/7/2 Time: 1693302417703
+Deleted by id at: Date: 29/7/2 Time: 1693302435416
+Updated at: Date: 29/7/2 Time: 1693302521377
+Updated at: Date: 29/7/2 Time: 1693302527443
+Updated at: Date: 29/7/2 Time: 1693302677530
+Updated at: Date: 29/7/2 Time: 1693302702186
+Accessed Total Value at: Date: 29/7/2 Time: 1693302717865
+Accessed Descending Sorted Data at: Date: 29/7/2 Time: 1693302850633
+Accessed Most Fav Author at: Date: 29/7/2 Time: 1693302856298
+Accessed Highest rated manga at: Date: 29/7/2 Time: 1693302859764
+Accessed getProductsByUserId at: Date: 29/7/2 Time: 1693302954217
+Updated at: Date: 29/7/2 Time: 1693304072951
+Created at: Date: 29/7/2 Time: 1693304086008
+Created at: Date: 30/7/3 Time: 1693367540914
+Created at: Date: 30/7/3 Time: 1693370762521
