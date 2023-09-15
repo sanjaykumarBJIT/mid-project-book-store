@@ -131,6 +131,11 @@ class CartClass {
       }
 
       const cart = await CartModel.findOne({ user: userid });
+
+      if (cart.products[0].quantity<quantity) {
+        return res.status(400).send(failure("Product stock invalid"));
+      }
+
       if (!cart) {
         return res.status(400).send(failure("User does not have a cart"));
       }

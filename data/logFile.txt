@@ -28,3 +28,8 @@
 /api/cart/addToCart || Status: totalQuantity is not defined || Date: 15/9/2023 || Time: 16:45:7 BST
 /api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:45:24 BST
 /api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 17:18:43 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 18:24:11 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 18:24:33 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 18:24:57 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 18:25:8 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 18:26:59 BST
