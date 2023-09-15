@@ -1,6 +1,7 @@
 const { failure } = require("../util/common");
 const jsonwebtoken = require("jsonwebtoken");
 const statusCodes = require("../constants/statusCodes");
+const HTTP_STATUS = require("../constants/statusCodes");
 
 const isAuthorized = (req, res, next) => {
   try {
@@ -16,13 +17,7 @@ const isAuthorized = (req, res, next) => {
     if (validate) {
       const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
       console.log("Decoded:::::::::::::::::",decoded);
-      if (decoded.user.access === "admin") {
         next();
-      } else {
-        return res
-          .status(statusCodes.UNAUTHORIZED)
-          .send(failure("Access permission denied"));
-      }
     } else {
       throw new Error();
     }
@@ -42,7 +37,52 @@ const isAuthorized = (req, res, next) => {
   }
 };
 
-// const isSpamming = (req, res, next) => {};
+const isAdmin = (req, res, next) => {
+  try {
+    if (!req.headers.authorization) {
+      return res
+        .status(statusCodes.UNAUTHORIZED)
+        .send(failure("Unauthorized access"));
+    }
+    const jwtToken = req.headers.authorization.split(" ")[1];
+      const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
+      console.log("Decoded:::::::::::::::::",decoded);
+      if (decoded.user.access === "admin") {
+        next();
+    } else {
+      return res
+        .status(statusCodes.UNAUTHORIZED)
+        .send(failure("Access permission denied for user"));
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal Server Error"));
+  }
+};
+
+const isUser = (req, res, next) => {
+  try {
+    if (!req.headers.authorization) {
+      return res
+        .status(statusCodes.UNAUTHORIZED)
+        .send(failure("Unauthorized access"));
+    }
+    const jwtToken = req.headers.authorization.split(" ")[1];
+      const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
+      console.log("Decoded:::::::::::::::::",decoded);
+      if (decoded.user.access === "user") {
+        next();
+    } else {
+      return res
+        .status(statusCodes.UNAUTHORIZED)
+        .send(failure("Access permission denied for user"));
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal Server Error"));
+  }
+};
 
 
-module.exports = { isAuthorized };
+
+module.exports = { isAuthorized, isAdmin, isUser};

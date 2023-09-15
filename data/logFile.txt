@@ -1,18 +1,30 @@
-Got all data at: Date: 29/7/2 Time: 1693301918509
-Accessed all data at: Date: 29/7/2 Time: 1693302399678
-Accessed One by Id at: Date: 29/7/2 Time: 1693302408735
-Created at: Date: 29/7/2 Time: 1693302417703
-Deleted by id at: Date: 29/7/2 Time: 1693302435416
-Updated at: Date: 29/7/2 Time: 1693302521377
-Updated at: Date: 29/7/2 Time: 1693302527443
-Updated at: Date: 29/7/2 Time: 1693302677530
-Updated at: Date: 29/7/2 Time: 1693302702186
-Accessed Total Value at: Date: 29/7/2 Time: 1693302717865
-Accessed Descending Sorted Data at: Date: 29/7/2 Time: 1693302850633
-Accessed Most Fav Author at: Date: 29/7/2 Time: 1693302856298
-Accessed Highest rated manga at: Date: 29/7/2 Time: 1693302859764
-Accessed getProductsByUserId at: Date: 29/7/2 Time: 1693302954217
-Updated at: Date: 29/7/2 Time: 1693304072951
-Created at: Date: 29/7/2 Time: 1693304086008
-Created at: Date: 30/7/3 Time: 1693367540914
-Created at: Date: 30/7/3 Time: 1693370762521
+/api/products/getAll || Status: Successfully accessed  || Date: 15/9/2023 || Time: 14:9:36 BST
+/api/products/getAll || Status: apiRoute is not defined || Date: 15/9/2023 || Time: 14:10:14 BST
+/api/products/filterProducts || Status: Successfully accessed  || Date: 15/9/2023 || Time: 14:11:55 BST
+/api/review/getReviewByUser || Status: Successfully accessed  || Date: 15/9/2023 || Time: 14:52:50 BST
+/api/review/addReview || Status: Successfully accessed  || Date: 15/9/2023 || Time: 14:54:15 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 15/9/2023 || Time: 15:11:25 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 15:14:22 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 15:15:5 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 15:16:40 BST
+/api/cart/addToCart || Status: Cast to ObjectId failed for value "" (type string) at path "_id" for model "books" || Date: 15/9/2023 || Time: 15:16:40 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 15:22:55 BST
+/api/cart/addToCart || Status: Cast to ObjectId failed for value "" (type string) at path "_id" for model "User" || Date: 15/9/2023 || Time: 15:22:55 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:15:51 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:17:10 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:28:30 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:29:5 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:29:44 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:30:38 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:32:53 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:33:17 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:36:44 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:37:11 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:37:19 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:38:14 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:39:2 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:43:58 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:45:4 BST
+/api/cart/addToCart || Status: totalQuantity is not defined || Date: 15/9/2023 || Time: 16:45:7 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 16:45:24 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 15/9/2023 || Time: 17:18:43 BST

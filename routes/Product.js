@@ -8,7 +8,7 @@ const FilterValidator = require("../middleware/filterValidation");
 // const updateValidation = require("../middleware/validation");
 
 routes.get("/getAll", ProductController.getAll);
-// routes.get("/filterProductsAdvanced", FilterValidator.filterValidation, ProductController.filterProducts);
+routes.get("/filterProducts", FilterValidator.filterValidation, ProductController.filterProducts);
 // routes.get("/getByID", ProductController.getOneById);
 // routes.post("/create",AuthValidator.isAuthorized , validator.createProductValidation, ProductController.create);
 
@@ -16,8 +16,8 @@ routes.get("/getAll", ProductController.getAll);
 // routes.delete("/deleteById", ProductController.deleteById);
 // routes.put("/updateById", validator.updateValidation, ProductController.updateById);
 
-routes.get("/getAllTransaction", transactionController.getAllTransaction);
-routes.post("/create", validator.createTransactionValidation, transactionController.createTransaction);
+// routes.get("/getAllTransaction", transactionController.getAllTransaction);
+// routes.post("/create", validator.createTransactionValidation, transactionController.createTransaction);
 
 
 module.exports = routes;

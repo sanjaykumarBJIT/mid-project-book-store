@@ -5,12 +5,13 @@ const filterValidator = {
   filterValidation: [
     query("page")
       .optional()
-      .isNumeric()
-      .withMessage("page should be numeric")
-      .bail()
       .not()
       .equals("")
       .withMessage("page was not provided in the property")
+      .bail()
+      .isNumeric()
+      .withMessage("page should be numeric")
+      .bail()
       .custom((value, { req, res }) => {
         console.log(req.query);
         if (value && req.query.limit) {
@@ -62,7 +63,7 @@ const filterValidator = {
         }
       }),
 
-      query("stock")
+    query("stock")
       .optional()
       .not()
       .equals("")
@@ -89,7 +90,6 @@ const filterValidator = {
           throw new Error("if stockFill exists then stock must also exist");
         }
       }),
-
 
     query("releaseDate")
       .optional()
@@ -141,12 +141,12 @@ const filterValidator = {
 
     query("sortParams")
       .optional()
-      .isString()
-      .withMessage("sortParams should be string")
-      .bail()
       .not()
       .equals("")
       .withMessage("page was not provided in the property")
+      .isString()
+      .withMessage("sortParams should be string")
+      .bail()
       .custom((value, { req, res }) => {
         console.log(req.query);
         if (value && req.query.sortOrder) {
@@ -160,19 +160,29 @@ const filterValidator = {
 
     query("search")
       .optional()
-      .isString()
-      .withMessage("search should be string")
       .not()
       .equals("")
-      .withMessage("search was provided in the property"),
+      .withMessage("search was provided in the property")
+      .bail()
+      .isString()
+      .withMessage("search should be string"),
 
     query("authorNames")
       .optional()
-      .isString()
-      .withMessage("search should be string")
       .not()
       .equals("")
-      .withMessage("search was provided in the property"),
+      .withMessage("authorNames was provided in the property")
+      .bail()
+      .isString()
+      .withMessage("authorNames should be string"),
+    query("genre")
+      .optional()
+      .not()
+      .equals("")
+      .withMessage("Genre field was not provided!")
+      .bail()
+      .isString()
+      .withMessage("Genre should be string"),
   ],
 };
 
