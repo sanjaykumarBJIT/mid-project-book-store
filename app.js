@@ -17,10 +17,10 @@ app.use(express.json()); // Parses data as JSON
 app.use(express.text()); // Parses data as text
 app.use(express.urlencoded({ extended: true })); // Parses data as urlencoded
 
-app.use("/products", ProductRouter);
-app.use("/auth",AuthRouter);
-app.use("/review",ReviewRouter);
-app.use("/cart",CartRouter);
+app.use("/api/products", ProductRouter);
+app.use("/api/auth",AuthRouter);
+app.use("/api/review",ReviewRouter);
+app.use("/api/cart",CartRouter);
 
 app.use((err, req, res, next) => {
     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {

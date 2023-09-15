@@ -4,15 +4,50 @@ const ProductModel = require("../model/Product");
 const { success, failure } = require("../util/common");
 const UserModel = require("../model/user");
 const CartModel = require("../model/cart");
+const logger = require("../util/log");
 const transactionModel = require("../model/transaction");
 const HTTP_STATUS = require("../constants/statusCodes");
-const Cart = require("../model/cart");
 const ReviewModel = require("../model/review");
 
 class CartClass {
+
+  async getCartById(req, res){
+    try {
+      const { userid } = req.body;
+
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
+
+      const user = await UserModel.findById(userid);
+      if (!user) {
+        return res.status(400).send(failure("User id does not exist"));
+      }
+
+      let cart = await CartModel.findOne({ user: userid });
+      console.log(cart);
+
+      return res.status(200).send(success("Successfully got cart products", cart.products));
+
+    } catch (error) {
+      console.error("Error:", error.message);
+      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      logger.logMessage(apiRoute);
+      return res.status(500).send(failure("Server Error"));
+    }
+  }
   async addToCart(req, res) {
     try {
       const { userid, productid, quantity } = req.body;
+
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
+
+      const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
+      logger.logMessage(apiRoute);
 
       const user = await UserModel.findById(userid);
       if (!user) {
@@ -24,11 +59,15 @@ class CartClass {
         return res.status(400).send(failure("Product id invalid"));
       }
 
-      if (product.stock < quantity) {
-        return res.status(400).send(failure("Product stock invalid"));
-      }
 
       let cart = await CartModel.findOne({ user: userid });
+
+      //counting if the newly added products quantiy is less than existing quatity
+      // console.log(cart, cart.products[0].quantity, totalQuantity);
+
+      if (product.stock < quantity+cart.products[0].quantity) {
+        return res.status(400).send(failure("Product stock invalid"));
+      }
 
       if (!cart) {
         cart = await CartModel.create({
@@ -63,6 +102,8 @@ class CartClass {
       return res.status(200).send(success("Successfully added to cart", cart));
     } catch (error) {
       console.error("Error:", error.message);
+      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
   }
@@ -70,6 +111,14 @@ class CartClass {
   async removeFromCart(req, res) {
     try {
       const { userid, productid, quantity } = req.body;
+
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
+
+      const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
+      logger.logMessage(apiRoute);
 
       const user = await UserModel.findById(userid);
       if (!user) {
@@ -111,6 +160,8 @@ class CartClass {
         .send(success("Successfully removed from cart", cart));
     } catch (error) {
       console.error("Error:", error);
+      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
   }
@@ -118,6 +169,9 @@ class CartClass {
   async checkOut(req, res) {
     try {
       const { userid, cartId } = req.body;
+
+      const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
+      logger.logMessage(apiRoute);
 
       const user = await UserModel.findById(userid);
       if (!user) {
@@ -165,6 +219,8 @@ class CartClass {
       }
     } catch (error) {
       console.error("Error:", error);
+      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
   }
