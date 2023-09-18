@@ -10,29 +10,20 @@ const User = require("../model/user");
 class TransactionProduct {
   async getAllTransaction(req, res) {
     try {
+      const { userid } = req.body;
+      let totalValue = 0;
       let transactionResult = await transactionModel
-        .find({})
-        .populate("user", "-access")
-        .populate("products.id", "-stock");
-        let totalvalueList = [];
-        // console.log(transactionResult.User._id);
+        .find({ user: userid }).select('-user')
+        // .populate("user", "-access")
+        .populate("products.product", "-stock");
+
       if (transactionResult.length > 0) {
-        let totalValue = 0;
+        totalValue = transactionResult.reduce((sum, transaction) => {
+          const { total } = transaction;
+          return sum + total;
+        }, 0);
 
-        for (const transaction of transactionResult) {
-          for (const product of transaction.products) {
-            const foundProduct = await productModel.findById(product.id);
-            console.log(product.id);
-            if (foundProduct) {
-              totalValue = totalValue + foundProduct.price * product.quantity;
-            }
-          }
-        //   console.log(transaction.user._id);
-          totalvalueList.push({"User ID": transaction.user.name, "Total order amount ": totalValue });
-          totalValue = 0;
-        }
-
-        transactionResult.push(totalvalueList);
+        transactionResult.push({ "lifetime order amount ": totalValue });
 
         return res
           .status(200)
@@ -40,7 +31,7 @@ class TransactionProduct {
             success("Successfully received all transactions", transactionResult)
           );
       } else {
-        return res.status(400).send(success("Didn't received all products"));
+        return res.status(400).send(success("No Transactions Found"));
       }
     } catch (error) {
       console.log("Found: " + error);

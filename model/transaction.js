@@ -4,7 +4,7 @@ const transactionSchema = new mongoose.Schema(
     cart: {
       type: mongoose.Types.ObjectId,
       ref: "Cart",
-      required: true,
+      required: false,
     },
     user: {
       type: mongoose.Types.ObjectId,

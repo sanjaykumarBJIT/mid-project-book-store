@@ -17,8 +17,7 @@ const booksSchema = new mongoose.Schema({
       required:[true, "stock was not provided"],
   },
   releaseDate: {
-      type: Number,
-      min: 1,
+      type: String,
       required:false,
   },
   author: {
