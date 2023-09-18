@@ -46,7 +46,7 @@ class AuthController {
         const jwt = jsonwebtoken.sign(
           modifiedResponse,
           process.env.SECRET_KEY,
-          { expiresIn: "1h" }
+          { expiresIn: "12h" }
         );
         modifiedResponse.token = jwt;
 

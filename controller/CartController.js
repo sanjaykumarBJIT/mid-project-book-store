@@ -11,7 +11,7 @@ const ReviewModel = require("../model/review");
 
 class CartClass {
 
-  async getCartById(req, res){
+  async getCartById(req, res) {
     try {
       const { userid } = req.body;
 
@@ -26,20 +26,24 @@ class CartClass {
       }
 
       let cart = await CartModel.findOne({ user: userid });
-      console.log(cart);
-
-      return res.status(200).send(success("Successfully got cart products", cart.products));
-
+      if(cart.products.length>0){
+        return res.status(200).send(success("Successfully got cart products", cart.products));
+      }else{
+        return res.status(400).send(failure("No Products in the cart"));
+      }
     } catch (error) {
       console.error("Error:", error.message);
-      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
   }
+
   async addToCart(req, res) {
     try {
       const { userid, productid, quantity } = req.body;
+
+      // console.log(quantity);
 
       const Validation = validationResult(req).array();
       if (Validation.length > 0) {
@@ -62,12 +66,19 @@ class CartClass {
 
       let cart = await CartModel.findOne({ user: userid });
 
-      //counting if the newly added products quantiy is less than existing quatity
-      // console.log(cart, cart.products[0].quantity, totalQuantity);
-
-      if (product.stock < quantity+cart.products[0].quantity) {
-        return res.status(400).send(failure("Product stock invalid"));
+      if(cart){
+        if(cart.products.length>0){
+          if (product.stock < (quantity + cart.products[0].quantity)) {
+            return res.status(400).send(failure("Product stock invalid"));
+          }
+        }else{
+          if (product.stock < quantity ) {
+            return res.status(400).send(failure("Product stock invalid"));
+          }
+        }
       }
+
+      console.log("cart:::::::::",cart);
 
       if (!cart) {
         cart = await CartModel.create({
@@ -81,6 +92,9 @@ class CartClass {
           total: product.price * quantity,
         });
       } else {
+
+        
+
         const existingProduct = cart.products.find(
           (item) => String(item.product) === productid
         );
@@ -101,8 +115,8 @@ class CartClass {
 
       return res.status(200).send(success("Successfully added to cart", cart));
     } catch (error) {
-      console.error("Error:", error.message);
-      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      console.error("Error:", error);
+      const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
@@ -132,12 +146,20 @@ class CartClass {
 
       const cart = await CartModel.findOne({ user: userid });
 
-      if (cart.products[0].quantity<quantity) {
-        return res.status(400).send(failure("Product stock invalid"));
+      if(cart){
+        if(cart.products.length>0){
+          if (product.stock < (quantity + cart.products[0].quantity)) {
+            return res.status(400).send(failure("Product stock invalid"));
+          }
+        }else{
+          if (product.stock < quantity ) {
+            return res.status(400).send(failure("Product stock invalid"));
+          }
+        }
       }
 
-      if (!cart) {
-        return res.status(400).send(failure("User does not have a cart"));
+      if (!cart || cart.products.length<1) {
+        return res.status(400).send(failure("User does not have a cart Or Does not have any product in the cart"));
       }
 
       const cartProductIndex = cart.products.findIndex(
@@ -165,7 +187,7 @@ class CartClass {
         .send(success("Successfully removed from cart", cart));
     } catch (error) {
       console.error("Error:", error);
-      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
@@ -173,58 +195,62 @@ class CartClass {
 
   async checkOut(req, res) {
     try {
-      const { userid, cartId } = req.body;
+      const { userid } = req.body;
 
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
       const user = await UserModel.findById(userid);
+      console.log("USER:::::::::::::::::",user);
       if (!user) {
         return res.status(400).send(failure("User id does not exist"));
       }
 
-      const cart = await Cart.findOne({ user: userid }).populate(
-        "products.product"
-      );
+      const cart = await CartModel.findOne({ user: userid });
 
       if (!cart) {
         return res.status(400).send(failure("User does not have a cart"));
       } else {
-        for (const cartProduct of cart.products) {
-          const productId = cartProduct.product._id;
-          const quantity = cartProduct.quantity;
+        const newTransaction = await transactionModel.create({
+          user : userid,
+          products: cart.products,
+          total: cart.total
+        })
 
-          // Update the product schema to reduce stock
-          const product = await ProductModel.findById(productId);
+        for (const productInfo of cart.products) {
+          const productid = productInfo.product; // Get the product ID
+          const quantity = productInfo.quantity; // Get the quantity
+    
+          // Find the corresponding product in the Product collection by its ID
+          const product = await ProductModel.findById(productid);
+
+          console.log("product",product);
+    
           if (!product) {
-            throw new Error(`ProductId not found`);
+            console.error(`Product with ID ${productid} not found`);
+            continue; // Skip to the next product if not found
           }
-
-          if (product.stock < quantity) {
-            throw new Error(`Insufficient stock for product`);
-          }
-
-          product.stock -= quantity;
-          cart.total = 0;
-
-          const newTransaction = await transactionModel.create({
-            cart: cartId,
-          });
-
+    
+          // Update the product's properties, for example, the stock
+          product.stock -= quantity; // Adjust stock based on the quantity
+    
+          // Save the updated product
           await product.save();
-
-          cart.products.pull({ _id: cartProduct._id });
+    
+          // console.log(`Updated product ${product.name}, ID: ${product._id}`);
         }
 
         cart.products = [];
 
+        cart.total = 0;
+
         await cart.save();
 
-        return res.status(200).send(failure("Checked Out Successfully"));
+        return res.status(200).send(success("Checked Out Successfully, New transaction created.",newTransaction));
       }
     } catch (error) {
       console.error("Error:", error);
-      const apiRoute = req.originalUrl + " || Status: "+error.message;
+      const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
       return res.status(500).send(failure("Server Error"));
     }
