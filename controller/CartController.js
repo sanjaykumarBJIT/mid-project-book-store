@@ -12,7 +12,6 @@ const HTTP_STATUS = require("../constants/statusCodes");
 const ReviewModel = require("../model/review");
 
 class CartClass {
-
   async getCartById(req, res) {
     try {
       const { userId } = req.body;
@@ -190,8 +189,6 @@ class CartClass {
           if (product.stock < quantity + cart.products[0].quantity) {
             return res.status(400).send(failure("Product stock invalid"));
           }
-
-
         } else {
           if (product.stock < quantity) {
             return res.status(400).send(failure("Product stock invalid"));
@@ -247,6 +244,11 @@ class CartClass {
   async checkOut(req, res) {
     try {
       const { userId } = req.body;
+
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
 
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -332,7 +334,6 @@ class CartClass {
       return res.status(500).send(failure("Server Error"));
     }
   }
-  
 }
 
 module.exports = new CartClass();

@@ -184,6 +184,51 @@ const filterValidator = {
       .isString()
       .withMessage("Genre should be string"),
   ],
+
+  getAllValidation: [
+    body("Id")
+      .exists()
+      .withMessage("Id should be provided")
+      .bail()
+      .not()
+      .equals("")
+      .withMessage("Id value not was provided in the property")
+      .bail()
+      .isString()
+      .withMessage("Id should be string"),
+
+    body("page")
+      .optional()
+      .not()
+      .equals("")
+      .withMessage("page was not provided in the property")
+      .bail()
+      .isNumeric()
+      .withMessage("page should be numeric")
+      .bail()
+      .custom((value, { req, res }) => {
+        // console.log(req.body);
+        if (value && req.body.limit) {
+          return true;
+        } else {
+          throw new Error("if page exists then limit must also exist");
+        }
+      }),
+
+    body("limit")
+      .optional()
+      .not()
+      .equals("")
+      .withMessage("limit value  not was provided in the property")
+      .custom((value, { req, res }) => {
+        // console.log(req.body);
+        if (value && req.body.page) {
+          return true;
+        } else {
+          throw new Error("if limit exists then page must also exist");
+        }
+      }),
+  ],
 };
 
 module.exports = filterValidator;

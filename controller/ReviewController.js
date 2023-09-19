@@ -13,6 +13,12 @@ const ReviewModel = require("../model/review");
 class Review {
   async addReview(req, res) {
     try {
+
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("Invalid input", Validation));
+      }
+
       const { reviewMessage, reviewStars, userId, productId } = req.body;
       let totalStars, average;
 
@@ -137,6 +143,10 @@ class Review {
 
   async removeReview(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("Invalid input", Validation));
+      }
       const { productId, userId } = req.body;
 
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -185,6 +195,10 @@ class Review {
 
   async getReviewByProduct(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("Invalid input", Validation));
+      }
       const { productId } = req.body;
 
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -195,7 +209,7 @@ class Review {
 
         if (reviewsByProducts) {
           return res
-            .status(200)
+            .status(HTTP_STATUS.OK)
             .send(
               success(
                 "Successfully retrieved all product Reviews",
@@ -203,18 +217,24 @@ class Review {
               )
             );
         } else {
-          return res.status(400).send(failure("No product Reviews found"));
+          return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("No product found"));
         }
+      }else{
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("User ID not provided"));
       }
     } catch (error) {
       const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
-      return res.status(500).send(failure("Internal server error"));
+      return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal server error"));
     }
   }
 
   async getReviewByUser(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("Invalid input", Validation));
+      }
       const { userId } = req.body;
 
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -255,11 +275,13 @@ class Review {
             .status(400)
             .send(failure(`No product Reviews found for userId: '${userId}'`));
         }
+      }else{
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("User ID not provided"));
       }
     } catch (error) {
       const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
-      return res.status(500).send(failure("Internal server error"));
+      return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal server error"));
     }
   }
 }

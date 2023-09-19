@@ -14,14 +14,26 @@ const ReviewModel = require("../model/review");
 
 class Product {
 
-  async getAll(req, res) {
+  async getAllwithDiscount(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(failure("Invalid input", Validation));
+      }
+      
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
-      const {userId} = req.body;
+      let {Id, page, limit} = req.body;
 
-      const userCity = await UserModel.findById(userId).select("city");
+      if(!page){
+        page = 1;
+      }
+      if(limit){
+        limit = 3;
+      }
+
+      const userCity = await UserModel.findById(Id).select("city");
       console.log(userCity.city);
 
       const currentTime = new Date();
@@ -33,8 +45,8 @@ class Product {
       })
 
       console.log(discounts);
-
-      const allProducts = await ProductModel.find({});
+      const skipAmount = (page - 1) * limit;
+      const allProducts = await ProductModel.find({}).skip(skipAmount).limit(limit);;
 
       const productsWithDiscountedPrice = allProducts.map((product) => {
         const validDiscounts = discounts.filter((discount) =>
@@ -65,7 +77,7 @@ class Product {
 
       return res.status(HTTP_STATUS.NOT_FOUND).send(success("No Products found"));
     } catch (error) {
-      const apiRoute = req.originalUrl + " || Status: " + error.message;
+      const apiRoute = req.originalUrl + " || Status: " + error;
       logger.logMessage(apiRoute);
       return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal server error"));
     }
@@ -81,13 +93,10 @@ class Product {
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
-      let product = ProductModel.find();    //Throws error if await is declared here!!!
-      // product = product.toObject();
+      let product = ProductModel.find();
 
       console.log(product.length)
 
-      // const products = await ProductModel.getAll();
-      let totalData = 0;
       let {
         page,
         limit,

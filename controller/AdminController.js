@@ -39,6 +39,11 @@ class Admin {
 
   async updateUserData(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
+      
       const { userId, name, access } = req.body;
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -76,6 +81,10 @@ class Admin {
 
   async deleteUserData(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
       const { userId } = req.body;
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -118,6 +127,10 @@ class Admin {
 
   async editBookData(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
@@ -195,6 +208,10 @@ class Admin {
 
   async addNewBook(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
@@ -280,6 +297,10 @@ class Admin {
 
   async addDiscount(req, res) {
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
       const { productId, startDate, endDate, discountAmount, city } = req.body;
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
@@ -349,6 +370,10 @@ class Admin {
 
   async deleteBookData(req, res){
     try {
+      const Validation = validationResult(req).array();
+      if (Validation.length > 0) {
+        return res.status(422).send(failure("Invalid input", Validation));
+      }
       const { bookId } = req.body;
       const deleteReviews = await ReviewModel.deleteOne({ productId: bookId });
 
