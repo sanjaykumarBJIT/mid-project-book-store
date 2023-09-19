@@ -23,7 +23,7 @@ class LogClass {
 
     // Append the log entry to the log file
     fs.appendFile(
-      path.join(__dirname, "..", "data", "logFile.txt"),
+      path.join(__dirname, "..", "server", "logFile.txt"),
       logEntry + "\n",
       "utf8",
       (err) => {

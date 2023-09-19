@@ -179,8 +179,7 @@ class Review {
           .status(200)
           .send(
             success(
-              "Successfully removed product Reviews",
-              existingReview.reviews
+              "Successfully removed product Reviews"
             )
           );
       } else {
