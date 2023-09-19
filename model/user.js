@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required:false,
     default:0.00,
+  },
+  city:{
+    type:String,
+    required:false,
+    default:"dhaka"
   }
 });
 

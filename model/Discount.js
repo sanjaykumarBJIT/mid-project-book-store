@@ -16,6 +16,11 @@ const discountSchema = new mongoose.Schema({
                 required: false,
                 default: 0
             },
+            city:{
+                type: String,
+                required: true,
+                default: "dhaka"
+            },
             _id: false,
         },
     ],

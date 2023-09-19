@@ -10,5 +10,6 @@ routes.delete("/deleteUserData", AuthValidator.isAuthorized, AuthValidator.isAdm
 routes.patch("/editBookData", AuthValidator.isAuthorized, AuthValidator.isAdmin, AdminController.editBookData);
 routes.post("/addNewBook", AuthValidator.isAuthorized, AuthValidator.isAdmin, AdminController.addNewBook);
 routes.post("/addDiscount", AuthValidator.isAuthorized, AuthValidator.isAdmin, AdminController.addDiscount);
+routes.delete("/deleteBookData", AuthValidator.isAuthorized, AuthValidator.isAdmin, AdminController.deleteBookData);
 
 module.exports = routes;

@@ -331,3 +331,133 @@
 /api/admin/addNewBook || Status: newDate is not defined || Date: 19/9/2023 || Time: 2:0:53 BST
 /api/admin/addNewBook || Status: Successfully accessed  || Date: 19/9/2023 || Time: 2:1:14 BST
 /api/admin/addNewBook || Status: Successfully accessed  || Date: 19/9/2023 || Time: 2:1:44 BST
+/api/user/addFund || Status: Successfully accessed  || Date: 19/9/2023 || Time: 8:18:53 BST
+/api/user/addFund || Status: Successfully accessed  || Date: 19/9/2023 || Time: 8:18:59 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 8:33:44 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 8:34:38 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 8:40:10 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:4:11 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:4:37 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:8:50 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:9:20 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:10:10 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:10:23 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:11:7 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:12:35 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:14:17 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:17:19 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:17:44 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:26:34 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:30:7 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:30:42 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:30:54 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:31:19 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:31:31 BST
+/api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:31:48 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:31:59 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:36:7 BST
+/api/products/getAll || Status: discount is not defined || Date: 19/9/2023 || Time: 9:36:11 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:36:30 BST
+/api/products/getAll || Status: discounts is not defined || Date: 19/9/2023 || Time: 9:36:31 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:36:51 BST
+/api/products/getAll || Status: Cannot read properties of undefined (reading '0') || Date: 19/9/2023 || Time: 9:36:52 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:39:34 BST
+/api/products/getAll || Status: discount is not defined || Date: 19/9/2023 || Time: 9:39:35 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:39:56 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 9:41:17 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:11:12 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:11:45 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:27:2 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:28:13 BST
+/api/cart/checkOut || Status: Transaction validation failed: total: Path `total` is required. || Date: 19/9/2023 || Time: 10:28:14 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:28:34 BST
+/api/cart/checkOut || Status: ValidationError: total: Path `total` is required. || Date: 19/9/2023 || Time: 10:28:36 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:30:7 BST
+/api/cart/checkOut || Status: ValidationError: total: Path `total` is required. || Date: 19/9/2023 || Time: 10:30:8 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:32:39 BST
+/api/cart/checkOut || Status: ValidationError: total: Cast to Number failed for value "Promise { <pending> }" (type Promise) at path "total" || Date: 19/9/2023 || Time: 10:32:41 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:33:36 BST
+/api/cart/checkOut || Status: ValidationError: total: Cast to Number failed for value "Promise { <pending> }" (type Promise) at path "total" || Date: 19/9/2023 || Time: 10:33:38 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:35:50 BST
+/api/cart/checkOut || Status: ValidationError: total: Cast to Number failed for value "Promise { <pending> }" (type Promise) at path "total" || Date: 19/9/2023 || Time: 10:35:53 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:46:22 BST
+/api/cart/checkOut || Status: ValidationError: total: Cast to Number failed for value "[ Promise { 9.99 } ]" (type Array) at path "total" || Date: 19/9/2023 || Time: 10:46:24 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:47:37 BST
+/api/cart/checkOut || Status: ValidationError: total: Cast to Number failed for value "[ Promise { 9.99 } ]" (type Array) at path "total" || Date: 19/9/2023 || Time: 10:47:40 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:54:25 BST
+/api/cart/checkOut || Status: ReferenceError: cart is not defined || Date: 19/9/2023 || Time: 10:54:26 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:58:24 BST
+/api/cart/checkOut || Status: ReferenceError: cartId is not defined || Date: 19/9/2023 || Time: 10:58:26 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 10:59:19 BST
+/api/cart/checkOut || Status: ValidationError: balance: Cast to Number failed for value "NaN" (type number) at path "balance" || Date: 19/9/2023 || Time: 10:59:25 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:0:25 BST
+/api/cart/checkOut || Status: ValidationError: balance: Cast to Number failed for value "NaN" (type number) at path "balance" || Date: 19/9/2023 || Time: 11:0:27 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:1:50 BST
+/api/cart/checkOut || Status: ValidationError: balance: Cast to Number failed for value "NaN" (type number) at path "balance" || Date: 19/9/2023 || Time: 11:1:52 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:3:38 BST
+/api/cart/checkOut || Status: ValidationError: balance: Cast to Number failed for value "NaN" (type number) at path "balance" || Date: 19/9/2023 || Time: 11:3:40 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:7:22 BST
+/api/cart/checkOut || Status: ReferenceError: newTransaction is not defined || Date: 19/9/2023 || Time: 11:7:24 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:7:43 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:8:58 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:9:12 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:10:19 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:10:26 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:13:33 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:13:37 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:13:48 BST
+/api/cart/checkOut || Status: ReferenceError: validDiscounts is not defined || Date: 19/9/2023 || Time: 11:13:50 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:14:19 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:15:52 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:16:5 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:16:10 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:17:43 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:19:41 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:19:50 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:21:8 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:21:18 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:21:25 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:30:19 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:30:27 BST
+/api/cart/checkOut || Status: TypeError: totalPrice.reduce is not a function || Date: 19/9/2023 || Time: 11:30:28 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:33:34 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:33:39 BST
+/api/cart/checkOut || Status: TypeError: totalPrice.reduce is not a function || Date: 19/9/2023 || Time: 11:33:41 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:35:36 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:35:44 BST
+/api/cart/checkOut || Status: ReferenceError: total is not defined || Date: 19/9/2023 || Time: 11:35:46 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:36:46 BST
+/api/cart/checkOut || Status: ReferenceError: total is not defined || Date: 19/9/2023 || Time: 11:36:49 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:37:13 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:40:3 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:40:7 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:44:33 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:44:37 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:44:39 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:44:43 BST
+/api/products/getAll || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:45:21 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:47:33 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:47:37 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:48:5 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:48:9 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:48:59 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:49:3 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:55:30 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:55:58 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 19/9/2023 || Time: 11:56:5 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:3:1 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:3:8 BST
+/api/cart/getCartById || Status: userCity is not defined || Date: 19/9/2023 || Time: 12:3:16 BST
+/api/cart/getCartById || Status: currentTime is not defined || Date: 19/9/2023 || Time: 12:4:3 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:18:19 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:18:33 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:23:33 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:23:43 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:28:55 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 12:28:58 BST
+/api/cart/removeFromCart || Status: calculateTotalPrice is not defined || Date: 19/9/2023 || Time: 12:28:59 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 13:17:49 BST
+/api/cart/removeFromCart || Status: Cannot read properties of undefined (reading 'calculateTotalPrice') || Date: 19/9/2023 || Time: 13:17:50 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 13:24:50 BST
+/api/cart/removeFromCart || Status: returnObject is not defined || Date: 19/9/2023 || Time: 13:24:54 BST
+/api/cart/removeFromCart || Status: Successfully accessed  || Date: 19/9/2023 || Time: 13:25:55 BST

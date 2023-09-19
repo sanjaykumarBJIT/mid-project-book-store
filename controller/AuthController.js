@@ -103,7 +103,7 @@ class AuthController {
         return res.status(422).send(failure("Invalid input", Validation));
       }
 
-      const { email, password, name, userName, phoneNo } = req.body;
+      const { email, password, name, userName, phoneNo, city } = req.body;
 
       const isAvailable = await UserModel.findOne({email});
       
@@ -121,7 +121,8 @@ class AuthController {
           email,
           name,
           userName,
-          phoneNo
+          phoneNo,
+          city
         });
 
         if (newUser) {

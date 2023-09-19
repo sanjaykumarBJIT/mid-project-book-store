@@ -90,10 +90,10 @@ class Admin {
             reviews: { userId: userId },
           },
           // $set: {
-          //   averageRating: 0, 
+          //   averageRating: 0,
           // },
         }
-      )
+      );
       const deleteUser = await UserModel.deleteOne({ _id: userId });
 
       ///-------Transaction not delete because its sensible data
@@ -118,10 +118,20 @@ class Admin {
 
   async editBookData(req, res) {
     try {
-      const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
+      const apiRoute =
+        req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
-      const { bookId, genre, synonyms, demographic, price, stock, author, releaseDate } = req.body;
+      const {
+        bookId,
+        genre,
+        synonyms,
+        demographic,
+        price,
+        stock,
+        author,
+        releaseDate,
+      } = req.body;
 
       const editItems = {};
 
@@ -171,8 +181,9 @@ class Admin {
           .send(success("Book successfully updated", book));
       }
 
-      return res.status(HTTP_STATUS.NOT_FOUND).send(failure("No updates were made"));
-
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .send(failure("No updates were made"));
     } catch (error) {
       const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
@@ -184,17 +195,29 @@ class Admin {
 
   async addNewBook(req, res) {
     try {
-      const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
+      const apiRoute =
+        req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
-      const { name, genre, synonyms, demographic, price, stock, author, releaseDate } = req.body;
+      const {
+        name,
+        genre,
+        synonyms,
+        demographic,
+        price,
+        stock,
+        author,
+        releaseDate,
+      } = req.body;
 
       const newBookProperties = {};
 
       const book = await ProductModel.findOne({ name: name });
 
       if (book) {
-        return res.status(HTTP_STATUS.NOT_FOUND).send(failure("Book name already exists"));
+        return res
+          .status(HTTP_STATUS.NOT_FOUND)
+          .send(failure("Book name already exists"));
       }
 
       if (name) {
@@ -231,11 +254,11 @@ class Admin {
           {
             startTime: new Date(),
             endTime: new Date(),
-            discountAmount:0,
-          }
+            discountAmount: 0,
+          },
         ],
         productId: newBook._id,
-      })
+      });
 
       if (newBook && newBookDiscount) {
         return res
@@ -243,7 +266,9 @@ class Admin {
           .send(success("New Book added successfully!!", newBook));
       }
 
-      return res.status(HTTP_STATUS.NOT_FOUND).send(failure("No new book was added"));
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .send(failure("No new book was added"));
     } catch (error) {
       const apiRoute = req.originalUrl + " || Status: " + error.message;
       logger.logMessage(apiRoute);
@@ -255,48 +280,63 @@ class Admin {
 
   async addDiscount(req, res) {
     try {
-      const { productId, startDate, endDate, discountAmount } = req.body;
+      const { productId, startDate, endDate, discountAmount, city } = req.body;
       const apiRoute =
         req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
-      const discountedProduct = await discountModel.findOne({ productId: productId });
-      console.log("discountedProduct",discountedProduct);
-      if (!discountedProduct) {
-        const discountData = await discountModel.create({
-          productId: productId, // Replace with the actual productId
+      const discountData = await discountModel.findOne({
+        productId: productId,
+      });
+      if (!discountData) {
+        // If no document exists for the productId, create a new one
+        const newDiscountData = await discountModel.create({
+          productId: productId,
           discounts: [
             {
               startTime: new Date(startDate),
-              endTime: new Date(endDate), 
-              discountAmount: discountAmount, 
+              endTime: new Date(endDate),
+              discountAmount: discountAmount,
+              city: city,
             },
           ],
         });
-        console.log(discountData);
 
         return res
           .status(HTTP_STATUS.OK)
-          .send(success(`Successfully added discount`, discountData));
-        
+          .send(success(`Successfully added discount`, newDiscountData));
       } else {
-
-        const discountData = await discountModel.findOneAndUpdate(
-          { productId: productId },
-          {
-            $push: {
-              discounts: {
-                startTime: new Date(startDate),
-                endTime: new Date(endDate),
-                discountAmount: discountAmount,
-              },
-            },
-          },
-          { new: true } // Return the updated document
+        // Check if the city already exists in the discounts array
+        const existingDiscountIndex = discountData.discounts.findIndex(
+          (discount) => discount.city === city
         );
+
+        if (existingDiscountIndex !== -1) {
+          // If the city already exists, update the values
+          discountData.discounts[existingDiscountIndex].startTime = new Date(
+            startDate
+          );
+          discountData.discounts[existingDiscountIndex].endTime = new Date(
+            endDate
+          );
+          discountData.discounts[existingDiscountIndex].discountAmount =
+            discountAmount;
+        } else {
+          // If the city does not exist, push a new discount object
+          discountData.discounts.push({
+            startTime: new Date(startDate),
+            endTime: new Date(endDate),
+            discountAmount: discountAmount,
+            city: city,
+          });
+        }
+
+        // Save the updated document
+        await discountData.save();
+
         return res
           .status(HTTP_STATUS.OK)
-          .send(success("Product found",discountData));
+          .send(success("Product found", discountData));
       }
     } catch (error) {
       const apiRoute = req.originalUrl + " || Status: " + error.message;
@@ -307,7 +347,30 @@ class Admin {
     }
   }
 
+  async deleteBookData(req, res){
+    try {
+      const { bookId } = req.body;
+      const deleteReviews = await ReviewModel.deleteOne({ productId: bookId });
 
+      const deleteBook = await ProductModel.findByIdAndDelete(bookId);
+
+      if(deleteBook){
+        return res
+          .status(HTTP_STATUS.OK)
+          .send(success("Product deleted", deleteBook));
+      }
+      else{
+        return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .send(failure("Book Id does not exist"));
+      }
+    } catch (error) {
+      return res
+          .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+          .send(failure("Internal Server Error"));
+    }
+    
+  }
 }
 
 module.exports = new Admin();

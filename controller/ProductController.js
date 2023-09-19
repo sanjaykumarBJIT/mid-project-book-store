@@ -19,32 +19,48 @@ class Product {
       const apiRoute = req.originalUrl + " || " + "Status: Successfully accessed ";
       logger.logMessage(apiRoute);
 
-      const allProducts = await ProductModel.find({});
+      const {userId} = req.body;
 
-      // const currentTime = new Date().toISOString();
-      // const dateObj = new Date(currentTime);
-      // const year = dateObj.getFullYear();
-      // const month = dateObj.getMonth() + 1; // Months are 0-indexed, so add 1
-      // const day = dateObj.getDate();
-      // const hour = dateObj.getHours();
-      // const minute = dateObj.getMinutes();
-      // const second = dateObj.getSeconds();
-
-      // const currentTime1 =  `${day}-${month}-${year} ${hour}:${minute}:${second}`;
-
-      const currentTime2 = new Date("2023-05-01 01:20:45");
+      const userCity = await UserModel.findById(userId).select("city");
+      console.log(userCity.city);
 
       const currentTime = new Date();
 
-      if(currentTime>currentTime2){
-        console.log("currentTime<currentTime2");
-      }
+      const discounts = await discountModel.find({
+        'discounts.city': String(userCity.city),
+        'discounts.startTime': { $lte: currentTime },
+        'discounts.endTime': { $gte: currentTime },
+      })
+
+      console.log(discounts);
+
+      const allProducts = await ProductModel.find({});
+
+      const productsWithDiscountedPrice = allProducts.map((product) => {
+        const validDiscounts = discounts.filter((discount) =>
+          discount.productId.equals(product._id)
+        );
+    
+        if (validDiscounts.length > 0) {
+          const discountAmount = validDiscounts[0].discounts[0].discountAmount;
+          const discountedPrice = product.price - ((product.price*discountAmount)/100);
+    
+          return {
+            ...product.toObject(),
+            price: discountedPrice,
+          };
+        }
+    
+        return product.toObject();
+      });
+
+      // const currentTime2 = new Date("2023-05-01 01:20:45");
       
 
-      if (allProducts.length > 0) {
+      if (productsWithDiscountedPrice.length > 0) {
         return res
           .status(HTTP_STATUS.OK)
-          .send(success("Successfully received all products", allProducts));
+          .send(success("Successfully received all products", productsWithDiscountedPrice));
       }
 
       return res.status(HTTP_STATUS.NOT_FOUND).send(success("No Products found"));
