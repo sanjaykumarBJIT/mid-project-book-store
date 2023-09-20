@@ -575,3 +575,8 @@
 /api/admin/addNewBook || Status: Successfully accessed  || Date: 19/9/2023 || Time: 22:14:47 BST
 /api/admin/deleteUserData || Status: Successfully accessed  || Date: 19/9/2023 || Time: 22:17:39 BST
 /api/admin/addDiscount || Status: Successfully accessed  || Date: 19/9/2023 || Time: 22:23:26 BST
+/api/review/removeReviewByUser || Status: Successfully accessed  || Date: 20/9/2023 || Time: 8:19:0 BST
+/api/cart/addToCart || Status: Successfully accessed  || Date: 20/9/2023 || Time: 8:48:6 BST
+/api/cart/checkOut || Status: Successfully accessed  || Date: 20/9/2023 || Time: 8:48:38 BST
+/api/review/addReview || Status: Successfully accessed  || Date: 20/9/2023 || Time: 8:49:10 BST
+/api/review/getReviewByUser || Status: Successfully accessed  || Date: 20/9/2023 || Time: 8:51:21 BST
