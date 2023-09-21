@@ -11,7 +11,7 @@ const isAuthorized = (req, res, next) => {
         .send(failure("Unauthorized access"));
     }
 
-    const{userId} = req.body;
+    const { userId } = req.body;
     const jwtToken = req.headers.authorization.split(" ")[1];
 
     const validate = jsonwebtoken.verify(jwtToken, process.env.SECRET_KEY);
@@ -20,7 +20,7 @@ const isAuthorized = (req, res, next) => {
       const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
       // console.log("Decoded:::::::::::::::::",decoded.user._id, userId);
       // if(decoded.user._id == userId){
-        next();
+      next();
       // }
     } else {
       throw new Error();
@@ -43,50 +43,74 @@ const isAuthorized = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   try {
+    const { userId } = req.body;
     if (!req.headers.authorization) {
       return res
         .status(statusCodes.UNAUTHORIZED)
         .send(failure("Unauthorized access"));
     }
     const jwtToken = req.headers.authorization.split(" ")[1];
-      const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
-      console.log("Decoded:::::::::::::::::",decoded);
+    const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
+    console.log("Decoded:::::::::::::::::", decoded);
+    if (userId) {
+      if (decoded.user.access === "admin" && decoded.user._id === userId) {
+        next();
+      } else {
+        return res
+          .status(statusCodes.UNAUTHORIZED)
+          .send(failure("Access permission denied for user"));
+      }
+    }else {
       if (decoded.user.access === "admin") {
         next();
-    } else {
-      return res
-        .status(statusCodes.UNAUTHORIZED)
-        .send(failure("Access permission denied for user"));
+      }else {
+        return res
+          .status(statusCodes.UNAUTHORIZED)
+          .send(failure("Access permission denied for user"));
+      }
     }
   } catch (error) {
     console.log(error);
-    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal Server Error"));
+    return res
+      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+      .send(failure("Internal Server Error"));
   }
 };
 
 const isUser = (req, res, next) => {
   try {
+    const { userId } = req.body;
     if (!req.headers.authorization) {
       return res
         .status(statusCodes.UNAUTHORIZED)
         .send(failure("Unauthorized access"));
     }
     const jwtToken = req.headers.authorization.split(" ")[1];
-      const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
-      // console.log("Decoded:::::::::::::::::",decoded);
-      if (decoded.user.access === "user") {
+    const decoded = jsonwebtoken.decode(jwtToken, (verify = true));
+    // console.log("Decoded:::::::::::::::::",decoded.user._id,userId);
+    if (userId) {
+      if (decoded.user.access === "user" && decoded.user._id === userId) {
         next();
-    } else {
-      return res
-        .status(statusCodes.UNAUTHORIZED)
-        .send(failure("Access permission denied for user"));
+      } else {
+        return res
+          .status(statusCodes.UNAUTHORIZED)
+          .send(failure("Access permission denied for user"));
+      }
+    }else {
+      if (decoded.user.access === "admin") {
+        next();
+      }else {
+        return res
+          .status(statusCodes.UNAUTHORIZED)
+          .send(failure("Access permission denied for user"));
+      }
     }
   } catch (error) {
     console.log(error);
-    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(failure("Internal Server Error"));
+    return res
+      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+      .send(failure("Internal Server Error"));
   }
 };
 
-
-
-module.exports = { isAuthorized, isAdmin, isUser};
+module.exports = { isAuthorized, isAdmin, isUser };
